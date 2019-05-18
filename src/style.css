@@ -1,0 +1,11 @@
+.col-1-2 {
+    width: 50%;
+    float: left;
+  }
+.col-2-3 {
+    width: 65%;
+    float: left;
+  }
+.p-0{
+    padding: 0;
+}
