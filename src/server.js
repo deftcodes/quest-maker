@@ -1,21 +1,29 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-  
+
 const app = express();
 
-const urlencodedParser = bodyParser.urlencoded({extended: false});
- 
-var array = [];
+// Разрешаем использование статических файлов (images, css и т.п.)
+app.use('/public', express.static(__dirname + '/public'));
+
+const urlencodedParser = bodyParser.urlencoded({ extended: false });
+
+var myQuests = [];
 
 app.get("/", urlencodedParser, function (request, response) {
     response.sendFile(__dirname + "/index.html");
 });
 
-array.push()
-
 app.post("/", urlencodedParser, function (request, response) {
-    if(!request.body) return response.sendStatus(400);
+    if (!request.body) return response.sendStatus(400);
     console.log(request.body);
-    response.send(`${request.body.quest_name}`);
-}); 
+    myQuests.push(request.body);
+    response.sendStatus(200);    
+});
+
+// Url, отвечающий за выдачу массива созданных квестов
+app.get("/my-quests", urlencodedParser, function (request, response) {
+    response.send(myQuests);
+});
+
 app.listen(3000);
