@@ -8,7 +8,7 @@ app.use('/public', express.static(__dirname + '/public'));
 
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
-var myQuests = [];
+let myQuests = [];
 
 app.get("/", urlencodedParser, function (request, response) {
     response.sendFile(__dirname + "/index.html");
@@ -18,7 +18,9 @@ app.post("/", urlencodedParser, function (request, response) {
     if (!request.body) return response.sendStatus(400);
     console.log(request.body);
     myQuests.push(request.body);
-    response.sendStatus(200);    
+    
+    // Возвращаем пользователя обратно на страницу, с которой пришли.
+    response.sendFile(__dirname + "/index.html");
 });
 
 // Url, отвечающий за выдачу массива созданных квестов
