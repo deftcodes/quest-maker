@@ -14,6 +14,21 @@ app.get("/", urlencodedParser, function (request, response) {
     response.sendFile(__dirname + "/index.html");
 });
 
+var questDetail;
+
+app.get("/quests-details", urlencodedParser, function (request, response) {
+    //Создать объект и поместить в него имя квеста из request.query
+    //Нужно найти в массиве myQuests квест с таким именем которое было передано в request.query
+    myQuests.forEach(function (element) {
+        if (element.quest_name == request.query.quest_name) {
+            questDetail = element;
+        }
+    });
+    response.sendFile(__dirname + "/details.html");
+
+});
+
+
 app.get("/create-quest", urlencodedParser, function (request, response) {
     response.sendFile(__dirname + "/create.html");
 });
@@ -36,6 +51,11 @@ app.get("/my-quests", urlencodedParser, function (request, response) {
     }
     else
         response.send('У вас нет созданных квестов');
+});
+
+//Создать app.get quest-details и отправлять 
+app.get("/detail-name", urlencodedParser, function (request, response) {
+    response.send(questDetail);
 });
 
 
