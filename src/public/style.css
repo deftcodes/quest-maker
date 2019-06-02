@@ -12,3 +12,11 @@
 a {
   display: block;
 }
+.page-container {
+  width: 100%; /* Ширина */
+    background: #fc0; /* Цвет фона */
+    padding: 20px; /* Поля */
+    -moz-box-sizing: border-box; /* Для Firefox */
+    -webkit-box-sizing: border-box; /* Для Safari и Chrome */
+    box-sizing: border-box;
+  }
