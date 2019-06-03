@@ -1,11 +1,29 @@
 const express = require("express");
 const multer = require("multer");
 const bodyParser = require("body-parser");
-var path = require('path');
+const path = require('path');
+const loki = require('lokijs');
+const uuidv1 = require('uuid/v1');
+
+var db = new loki("db.json", {
+    autoload: true,
+    autoloadCallback : databaseInitialize,
+    autosave: true,
+    autosaveInterval: 4000
+});
+
+let quests_db;
+
+function databaseInitialize() {
+    if (!db.getCollection("quests")) {
+        db.addCollection("quests");        
+    }
+    quests_db = db.getCollection("quests");
+}
 
 const app = express();
 
-var storage = multer.diskStorage({
+let storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, 'images/')
     },
@@ -14,29 +32,25 @@ var storage = multer.diskStorage({
     }
 });
 
-var upload = multer({ storage: storage });
+const upload = multer({storage: storage});
 
 // Разрешаем использование статических файлов (images, css и т.п.)
 app.use('/public', express.static(__dirname + '/public'));
 app.use('/images', express.static(__dirname + '/images'));
 app.use(upload.single("filedata"));
 
-const urlencodedParser = bodyParser.urlencoded({ extended: false });
+const urlencodedParser = bodyParser.urlencoded({extended: false});
 
-let myQuests = [];
+//let myQuests = [];
 
 app.get("/", urlencodedParser, function (request, response) {
     response.sendFile(__dirname + "/index.html");
 });
 
-var questDetail;
+let questDetail;
 
 app.get("/quests-details", urlencodedParser, function (request, response) {
-    myQuests.forEach(function (element) {
-        if (element.quest_id == request.query.quest_id) {
-            questDetail = element;
-        }
-    });
+    questDetail = quests_db.find({'quest_id': request.query.quest_id})[0];
     response.sendFile(__dirname + "/details.html");
 
 });
@@ -52,29 +66,30 @@ app.get("/create-quest", urlencodedParser, function (request, response) {
 
 app.post("/save-detail", urlencodedParser, function (request, response) {
     if (!request.body) return response.sendStatus(400);
-    myQuests.forEach(function (element) {
-        if (element.quest_id == request.body.quest_id) {
-            element.quest_name = request.body.quest_name;
-            element.quest_info = request.body.quest_info;
-            element.quest_file = request.file.path;
-        }
-    });
+    let quest = quests_db.find({'quest_id': parseInt(request.query.quest_id)});
+    quest.quest_name = request.body.quest_name;
+    quest.quest_info = request.body.quest_info;
+    quest.quest_file = request.file.path;
     response.sendFile(__dirname + "/create.html");
 });
 
-var questID = 1;
-
 app.post("/create-quest", urlencodedParser, function (request, response) {
     if (!request.body) return response.sendStatus(400);
-    var quest = {};
-    if (request.file != undefined) {
-        quest = { quest_id: questID, quest_name: request.body.quest_name, quest_info: request.body.inf, quest_file: request.file.path };
+    let quest = {};
+    let questId = uuidv1(); // Генерирует уникальный ключ
+    if (request.file !== undefined) {
+        quest = {
+            quest_id: questId,
+            quest_name: request.body.quest_name,
+            quest_info: request.body.inf,
+            quest_file: request.file.path
+        };
+    } else {
+        quest = {quest_id: questId, quest_name: request.body.quest_name, quest_info: request.body.inf};
     }
-    else {
-        quest = { quest_id: questID, quest_name: request.body.quest_name, quest_info: request.body.inf };
-    }
-    myQuests.push(quest);
-    questID = questID + 1;
+    //myQuests.push(quest);
+    quests_db.insert(quest);
+
     // Возвращаем пользователя обратно на страницу, с которой пришли.
     response.sendFile(__dirname + "/create.html");
 
@@ -83,15 +98,14 @@ app.post("/create-quest", urlencodedParser, function (request, response) {
 
 // Url, отвечающий за выдачу массива созданных квестов
 app.get("/my-quests", urlencodedParser, function (request, response) {
-    if (myQuests.length > 0) {
-        var myQuestWithId = [];
-        myQuests.forEach(function (element) {
-            var quest = { quest_id: element.quest_id, quest_name: element.quest_name };
+    if (quests_db.data.length > 0) {
+        const myQuestWithId = [];
+        quests_db.data.forEach(function (element) {
+            const quest = {quest_id: element.quest_id, quest_name: element.quest_name};
             myQuestWithId.push(quest)
         });
         response.send(myQuestWithId);
-    }
-    else
+    } else
         response.send('У вас нет созданных квестов');
 });
 
@@ -102,7 +116,6 @@ app.get("/detail-name", urlencodedParser, function (request, response) {
 app.get("/quest-edit-details", urlencodedParser, function (request, response) {
     response.send(questDetail);
 });
-
 
 
 app.listen(3000);
