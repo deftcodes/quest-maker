@@ -8,13 +8,11 @@ function edit()
 window.location='/quest-edit?quest_id='+ vars["quest_id"];
 }
 
-
 // Элемент, куда будут загружаться квесты
-var myQuests = document.querySelector('div[name="my-quests"]');
-
 var questDetails = document.querySelector('input[name="quest-name"]');
 var questDetailsInfo = document.querySelector('textarea[name="quest-info"]');
 var questDetailsPhoto = document.querySelector('div[name="photo"]');
+var questDetailsId = document.querySelector('input[name="quest-id"]');
 
 var id = document.querySelector('input[name="quest_id"]');
 var questEditName = document.querySelector('input[name="quest_name"]');
@@ -22,41 +20,25 @@ var questEditInfo = document.querySelector('textarea[name="quest_info"]');
 
 // Делаем запрос на сервер для получения квестов
 // Запрос отрабатывает при каждой загрузке страницы
-var url = "/my-quests"
+var url = "/detail-name"
 var request = new XMLHttpRequest();
 request.open('GET', url);
 request.responseType = 'json';
 
-// После получения ответа от сервера передаём данные в элемент myQuests
+// После получения ответа от сервера передаём данные в элемент 
 request.onload = function () {
-  if (request.response != undefined)
-    var a = '';
-  request.response.forEach(function (element) {
-    a = a + '<a href="/quests-details?quest_id=' + element.quest_id + '">' + element.quest_name + '</a>';
-  });
-  myQuests.innerHTML = a;
+  if (request.response != undefined) {
+    questDetails.value = request.response.quest_name;
+    questDetailsId.value = request.response.quest_id;
+   // var b = '';
+    //if (request.response.quest_file != undefined){
+   //b = '<audio src="' +  request.response.quest_file + '" class="w-100" controls></audio>';
+   // questDetailsPhoto.innerHTML = b;
+   // }
+    }
 };
 
 request.send();
-
-var url2 = "/detail-name"
-var request2 = new XMLHttpRequest();
-request2.open('GET', url2);
-request2.responseType = 'json';
-
-request2.onload = function () {
-  if (request2.response != undefined) {
-    questDetails.value = request2.response.quest_name;
-    questDetailsInfo.value = request2.response.quest_info;
-    var b = '';
-    if (request2.response.quest_file != undefined){
-    b = '<img src="' +  request2.response.quest_file + '" class="w-100"></img>';
-    questDetailsPhoto.innerHTML = b;
-    }
-    }
-};
-
-request2.send();
 
 var url3 = "/quest-edit-details"
 var request3 = new XMLHttpRequest();

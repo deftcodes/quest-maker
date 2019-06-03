@@ -81,22 +81,8 @@ app.post("/create-quest", urlencodedParser, function (request, response) {
 
 });
 
-// Url, отвечающий за выдачу массива созданных квестов
-app.get("/my-quests", urlencodedParser, function (request, response) {
-    if (myQuests.length > 0) {
-        var myQuestWithId = [];
-        myQuests.forEach(function (element) {
-            var quest = { quest_id: element.quest_id, quest_name: element.quest_name };
-            myQuestWithId.push(quest)
-        });
-        response.send(myQuestWithId);
-    }
-    else
-        response.send('У вас нет созданных квестов');
-});
-
 app.get("/detail-name", urlencodedParser, function (request, response) {
-    response.send(questDetail);
+    response.send(myQuests);
 });
 
 app.get("/quest-edit-details", urlencodedParser, function (request, response) {
