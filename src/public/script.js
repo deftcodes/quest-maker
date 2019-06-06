@@ -9,6 +9,8 @@ window.location='/quest-edit?quest_id='+ vars["quest_id"];
 }
 
 // Элемент, куда будут загружаться квесты
+var questName = document.querySelector('div[name="my-quests"]');
+
 var questDetails = document.querySelector('input[name="quest-name"]');
 var questDetailsInfo = document.querySelector('textarea[name="quest-info"]');
 var questDetailsPhoto = document.querySelector('div[name="photo"]');
@@ -19,26 +21,59 @@ var questEditName = document.querySelector('input[name="quest_name"]');
 var questEditInfo = document.querySelector('textarea[name="quest_info"]');
 
 // Делаем запрос на сервер для получения квестов
-// Запрос отрабатывает при каждой загрузке страницы
-var url = "/detail-name"
-var request = new XMLHttpRequest();
-request.open('GET', url);
-request.responseType = 'json';
+ // Запрос отрабатывает при каждой загрузке страницы
+ var url = "/my-quests"
+ var request = new XMLHttpRequest();
+ request.open('GET', url);
+ request.responseType = 'json';
 
 // После получения ответа от сервера передаём данные в элемент 
-request.onload = function () {
+ request.onload = function () {
   if (request.response != undefined) {
-    questDetails.value = request.response.quest_name;
-    questDetailsId.value = request.response.quest_id;
-   // var b = '';
-    //if (request.response.quest_file != undefined){
-   //b = '<audio src="' +  request.response.quest_file + '" class="w-100" controls></audio>';
-   // questDetailsPhoto.innerHTML = b;
-   // }
+    var b = '';
+    if (request.response.quest_file != undefined){
+      b = '<a href="#">'+  request.response.quest_name + '</a>';
+      questName.innerHTML = b;
     }
+  }
 };
 
 request.send();
+
+var url2 = "/quests-table-page"
+var request2 = new XMLHttpRequest();
+request2.open('GET', url2);
+request2.responseType = 'json';
+
+request2.onload = function () {
+  if (request2.response != undefined) {
+    questDetails.value = request2.response.quest_name;
+    questDetailsId.value = request2.response.quest_id;
+    }
+};
+
+request2.send();
+
+var url4 = "/quests-table"
+var request4 = new XMLHttpRequest();
+request4.open('GET', url4);
+request4.responseType = 'json';
+
+request4.onload = function () {
+  if (request4.response != undefined) {
+    request4.response.forEach(function(element) {
+      var newRow=document.getElementById('quest-table').insertRow();
+      newRow.innerHTML = `<tr>
+      <td><textarea name="quest-id">` + element.quest_id + `</textarea></td>
+      <td><textarea name="quest-name">`+ element.quest_name +`</textarea></td>
+      <td><button type="submit" class="btn btn-primary">Редактировать</button></td>
+      <td><button type="submit" class="btn btn-primary">Запустить квест</button></td>
+      </tr>`;
+    });
+    }
+};
+
+request4.send();
 
 var url3 = "/quest-edit-details"
 var request3 = new XMLHttpRequest();
@@ -54,4 +89,6 @@ request3.onload = function () {
 };
 
 request3.send();
+
+
 

@@ -48,12 +48,33 @@ app.get("/", urlencodedParser, function (request, response) {
 });
 
 let questDetail;
+let questTable;
 
 app.get("/quests-details", urlencodedParser, function (request, response) {
     questDetail = quests_db.find({'quest_id': request.query.quest_id})[0];
     response.sendFile(__dirname + "/details.html");
 
 });
+
+app.get("/quests-table-page", urlencodedParser, function (request, response) {
+    questTable = quests_db.data;
+    response.sendFile(__dirname + "/table.html");
+
+});
+
+// Url, отвечающий за выдачу массива созданных квестов
+app.get("/quests-table", urlencodedParser, function (request, response) {
+    if (quests_db.data.length > 0) {
+        const myQuestWithId = [];
+        quests_db.data.forEach(function (element) {
+            const quest = {quest_id: element.quest_id, quest_name: element.quest_name};
+            myQuestWithId.push(quest)
+        });
+        response.send(myQuestWithId);
+    } else
+        response.send('У вас нет созданных квестов');
+});
+
 
 app.get("/quest-edit", urlencodedParser, function (request, response) {
     response.sendFile(__dirname + "/editing.html");
@@ -66,7 +87,7 @@ app.get("/create-quest", urlencodedParser, function (request, response) {
 
 app.post("/save-detail", urlencodedParser, function (request, response) {
     if (!request.body) return response.sendStatus(400);
-    let quest = quests_db.find({'quest_id': parseInt(request.query.quest_id)});
+    let quest = quests_db.find({'quest_id': request.query.quest_id});
     quest.quest_name = request.body.quest_name;
     quest.quest_info = request.body.quest_info;
     quest.quest_file = request.file.path;
@@ -87,16 +108,12 @@ app.post("/create-quest", urlencodedParser, function (request, response) {
     } else {
         quest = {quest_id: questId, quest_name: request.body.quest_name, quest_info: request.body.inf};
     }
-    //myQuests.push(quest);
     quests_db.insert(quest);
 
     // Возвращаем пользователя обратно на страницу, с которой пришли.
     response.sendFile(__dirname + "/create.html");
-
-
 });
 
-// Url, отвечающий за выдачу массива созданных квестов
 app.get("/my-quests", urlencodedParser, function (request, response) {
     if (quests_db.data.length > 0) {
         const myQuestWithId = [];
