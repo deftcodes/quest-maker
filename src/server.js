@@ -41,14 +41,13 @@ app.use(upload.single("filedata"));
 
 const urlencodedParser = bodyParser.urlencoded({extended: false});
 
-//let myQuests = [];
-
 app.get("/", urlencodedParser, function (request, response) {
     response.sendFile(__dirname + "/index.html");
 });
 
 let questDetail;
 let questTable;
+let questEditDetails;
 
 app.get("/quests-details", urlencodedParser, function (request, response) {
     questDetail = quests_db.find({'quest_id': request.query.quest_id})[0];
@@ -75,8 +74,13 @@ app.get("/quests-table", urlencodedParser, function (request, response) {
         response.send('У вас нет созданных квестов');
 });
 
+app.get("/create-lvl", urlencodedParser, function (request, response) {
+    lvlEditDetails =  request.query.quest_id;
+    response.sendFile(__dirname + "/levels.html");
+});
 
 app.get("/quest-edit", urlencodedParser, function (request, response) {
+    questEditDetails = quests_db.find({'quest_id': request.query.quest_id})[0];
     response.sendFile(__dirname + "/editing.html");
 });
 
@@ -114,25 +118,48 @@ app.post("/create-quest", urlencodedParser, function (request, response) {
     response.sendFile(__dirname + "/create.html");
 });
 
-app.get("/my-quests", urlencodedParser, function (request, response) {
-    if (quests_db.data.length > 0) {
-        const myQuestWithId = [];
-        quests_db.data.forEach(function (element) {
-            const quest = {quest_id: element.quest_id, quest_name: element.quest_name};
-            myQuestWithId.push(quest)
-        });
-        response.send(myQuestWithId);
-    } else
-        response.send('У вас нет созданных квестов');
-});
 
 app.get("/detail-name", urlencodedParser, function (request, response) {
     response.send(questDetail);
 });
 
 app.get("/quest-edit-details", urlencodedParser, function (request, response) {
-    response.send(questDetail);
+    response.send(questEditDetails);
 });
 
+let myLvls = [];
+
+app.post("/save-lvl", urlencodedParser, function (request, response) {
+    if (!request.body) return response.sendStatus(400);
+    let lvlId = uuidv1();
+    if (request.file !== undefined) {
+        lvl = {
+            quest_id: request.body.quest_id, 
+            lvl_id: lvlId,
+            lvl_name: request.body.lvl_name,
+            question: request.body.question,
+            answer: request.body.answer
+        };
+    } else {
+        lvl = {quest_id: request.body.quest_id, lvl_id: lvlId,  lvl_name: request.body.lvl_name, question: request.body.question, answer: request.body.answer};
+    }
+    //quests_db.insert(lvl);
+
+    console.log(request.body);
+    myLvls.push(lvl);
+
+    // Возвращаем пользователя обратно на страницу, с которой пришли.
+    response.sendFile(__dirname + "/table.html");
+});
+
+app.get("/my-lvls", urlencodedParser, function (request, response) {
+    if (myLvls.length > 0) {
+        var myLvlName = [];
+        myLvls.forEach(function (element) { myLvlName.push(element) });
+        response.send(myLvlName);
+    }
+    else
+        response.send('У вас нет созданных уровней');
+});
 
 app.listen(3000);
