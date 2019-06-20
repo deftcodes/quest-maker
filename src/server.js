@@ -104,11 +104,12 @@ app.get("/create-quest", urlencodedParser, function (request, response) {
 
 app.post("/save-detail", urlencodedParser, function (request, response) {
     if (!request.body) return response.sendStatus(400);
-    let quest = quests_db.find({'quest_id': request.query.quest_id});
+    let quest = quests_db.find({'quest_id': request.body.quest_id})[0];
     quest.quest_name = request.body.quest_name;
     quest.quest_info = request.body.quest_info;
-    quest.quest_file = request.file.path;
-    response.sendFile(__dirname + "/create.html");
+    quest.quest_file = (request && request.file && request.file.path);
+    quests_db.update(quest);
+    response.sendFile(__dirname + "/table.html");
 });
 
 app.post("/create-quest", urlencodedParser, function (request, response) {
@@ -162,7 +163,7 @@ app.post("/save-lvl", urlencodedParser, function (request, response) {
             question: request.body.question,
             answer: request.body.answer
         };
-    }    
+    }
     levels_db.insert(lvl);
 
     console.log(request.body);
