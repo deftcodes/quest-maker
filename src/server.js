@@ -92,6 +92,33 @@ app.get("/level-edit-details", urlencodedParser, function (request, response) {
     response.send(lvlEditDetails);
 });
 
+app.get("/launch-quest", urlencodedParser, function (request, response) {
+    if (request.query.quest_id) {
+        lvlEditDetails = quests_db.find({'quest_id': request.query.quest_id})[0];
+    } else {
+        lvlEditDetails = request.query.quest_id;
+    }
+    response.sendFile(__dirname + "/launch.html");
+});
+
+app.get("/launch-edit-details", urlencodedParser, function (request, response) {
+    response.send(lvlEditDetails);
+});
+
+app.get("/launch-level", urlencodedParser, function (request, response) {
+    if (request.query.lvl_id) {
+        lvlEditDetails = level_db.find({'lvl_id': request.query.lvl_id})[0];
+    } else {
+        lvlEditDetails = request.query.lvl_id;
+    }
+    response.sendFile(__dirname + "/launch_lvl.html");
+});
+
+app.get("/launch-edit-details", urlencodedParser, function (request, response) {
+    response.send(lvlEditDetails);
+});
+
+
 app.get("/quest-edit", urlencodedParser, function (request, response) {
     questEditDetails = quests_db.find({'quest_id': request.query.quest_id})[0];
     response.sendFile(__dirname + "/editing.html");
