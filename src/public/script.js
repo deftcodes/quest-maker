@@ -19,6 +19,8 @@ var id = document.querySelector('input[name="quest_id"]');
 var questEditName = document.querySelector('input[name="quest_name"]');
 var questEditInfo = document.querySelector('textarea[name="quest_info"]');
 
+var launchLevel = document.querySelector('div[name="launch-level"]');
+
 // Уровень.
 var levelName = document.querySelector('input[name="lvl_name"]');
 var levelQuestion = document.querySelector('textarea[name="question"]');
@@ -50,10 +52,10 @@ request3.onload = function () {
         request3.response.forEach(function (element) {
             var newRow = document.getElementById('quest-table').insertRow();
             newRow.innerHTML = `<tr>
-      <td><textarea name="quest-id">` + element.quest_id + `</textarea></td>
-      <td><textarea name="quest-name">` + element.quest_name + `</textarea></td>
-      <td><button type="submit" class="btn btn-primary" onclick="javascript:window.location='/quest-edit?quest_id=` + element.quest_id + `'">Редактировать</button></td>
-      <td><button type="submit" class="btn btn-primary">Запустить квест</button></td>
+      <td><textarea name="quest-id"  class="form-control" cols="50" rows="1">` + element.quest_id + `</textarea></td>
+      <td><textarea name="quest-name"  class="form-control" cols="50" rows="1">` + element.quest_name + `</textarea></td>
+      <td><button type="submit" class="btn btn-secondary onclick="javascript:window.location='/quest-edit?quest_id=` + element.quest_id + `'">Редактировать</button></td>
+      <td><button type="submit" class="btn btn-primary" onclick="javascript:window.location='/launch-quest?quest_id=` + element.quest_id + `'">Запустить квест</button></td>
       </tr>`;
         });
     }
@@ -81,7 +83,6 @@ var request5 = new XMLHttpRequest();
 request5.open('GET', url5);
 request5.responseType = 'json';
 
-// После получения ответа от сервера передаём данные в элемент myQuests
 request5.onload = function () {
     if (request5.response != undefined)
         var a = '';
@@ -109,6 +110,41 @@ request6.onload = function () {
 };
 
 request6.send();
+
+var url7 = "/launch-edit-details";
+var request7 = new XMLHttpRequest();
+request7.open('GET', url7);
+request7.responseType = 'json';
+
+request7.onload = function () {
+    if (request7.response != undefined) {
+        levelName.value = request7.response.quest_name;
+        levelQuestion.value = request7.response.quest_info;
+    }
+};
+
+request7.send();
+
+var url8 = "/launch-level-details";
+var request8 = new XMLHttpRequest();
+request8.open('GET', url8);
+request8.responseType = 'json';
+
+request8.onload = function () {
+    if (request8.response != undefined) {
+        var c = '';
+        levelName.value = request7.response.level_name;
+        levelQuestion.value = request7.response.question;
+        request8.response.forEach(function (element) {
+        c =c + '<button type="submit" class="btn btn-secondary onclick="javascript:window.location=/quest-edit?lvl_id='+ element.lvl_id + '">Далее</button>';
+    });
+    launchLevel.innerHTML = с;
+    }
+};
+
+request8.send();
+
+
 
 
 
