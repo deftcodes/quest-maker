@@ -75,7 +75,7 @@ getQuestTable.onload = function () {
             newRow.innerHTML = `<tr>
       <td><textarea name="quest-id"  class="form-control" cols="50" rows="1">` + element.quest_id + `</textarea></td>
       <td><textarea name="quest-name"  class="form-control" cols="50" rows="1">` + element.quest_name + `</textarea></td>
-      <td><button type="submit" class="btn btn-secondary onclick="javascript:window.location='/quest-edit?quest_id=` + element.quest_id + `'">Редактировать</button></td>
+      <td><button type="submit" class="btn btn-primary" onclick="javascript:window.location='/quest-edit?quest_id=` + element.quest_id + `'">Редактировать</button></td>
       <td><button type="submit" class="btn btn-primary" onclick="javascript:window.location='/launch-quest?quest_id=` + element.quest_id + `'">Запустить квест</button></td>
       </tr>`;
         });
