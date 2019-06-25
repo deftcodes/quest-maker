@@ -1,93 +1,322 @@
 {
-    "filename": "db.json",
-    "collections": [
+  "filename": "db.json",
+  "collections": [
+    {
+      "name": "quests",
+      "data": [
         {
-            "name": "quests",
-            "data": [
-                {
-                    "quest_id": "bf256a10-861b-11e9-ae19-3db18fe65526",
-                    "quest_name": "sv ",
-                    "quest_info": "svsdv",
-                    "meta": {
-                        "revision": 0,
-                        "created": 1559578934066,
-                        "version": 0
-                    },
-                    "$loki": 1
-                }
-            ],
-            "idIndex": [
-                1
-            ],
-            "binaryIndices": {},
-            "constraints": null,
-            "uniqueNames": [],
-            "transforms": {},
-            "objType": "quests",
-            "dirty": false,
-            "cachedIndex": null,
-            "cachedBinaryIndex": null,
-            "cachedData": null,
-            "adaptiveBinaryIndices": true,
-            "transactional": false,
-            "cloneObjects": false,
-            "cloneMethod": "parse-stringify",
-            "asyncListeners": false,
-            "disableMeta": false,
-            "disableChangesApi": true,
-            "disableDeltaChangesApi": true,
-            "autoupdate": false,
-            "serializableIndices": true,
-            "ttl": null,
-            "maxId": 1,
-            "DynamicViews": [],
-            "events": {
-                "insert": [],
-                "update": [],
-                "pre-insert": [],
-                "pre-update": [],
-                "close": [],
-                "flushbuffer": [],
-                "error": [],
-                "delete": [
-                    null
-                ],
-                "warning": [
-                    null
-                ]
-            },
-            "changes": []
+          "quest_id": "893a60b0-8826-11e9-86e3-e7a6d34b8774",
+          "quest_name": "Квест",
+          "quest_info": "фывмсфывмыфв",
+          "meta": {
+            "revision": 0,
+            "created": 1559803470396,
+            "version": 0
+          },
+          "$loki": 1
+        },
+        {
+          "quest_id": "8f85b4b0-8826-11e9-86e3-e7a6d34b8774",
+          "quest_name": "Квест 2",
+          "quest_info": "ымфмфым",
+          "meta": {
+            "revision": 0,
+            "created": 1559803480955,
+            "version": 0
+          },
+          "$loki": 2
+        },
+        {
+          "quest_id": "93fd5a20-8826-11e9-86e3-e7a6d34b8774",
+          "quest_name": "Квест 3",
+          "quest_info": "ыфвмыфвм",
+          "meta": {
+            "revision": 0,
+            "created": 1559803488450,
+            "version": 0
+          },
+          "$loki": 3
+        },
+        {
+          "quest_id": "08cab5d0-8829-11e9-8538-218339834806",
+          "quest_name": "Квест 1",
+          "quest_info": "ыфвмфывм",
+          "meta": {
+            "revision": 0,
+            "created": 1559804543406,
+            "version": 0
+          },
+          "$loki": 4
+        },
+        {
+          "quest_id": "0c2f8bb0-8829-11e9-8538-218339834806",
+          "quest_name": "Квест 2",
+          "quest_info": "фывмыфвм",
+          "meta": {
+            "revision": 0,
+            "created": 1559804549099,
+            "version": 0
+          },
+          "$loki": 5
+        },
+        {
+          "quest_id": "0f9c9ef0-8829-11e9-8538-218339834806",
+          "quest_name": "Квест 3",
+          "quest_info": "ыфвмыфвм",
+          "meta": {
+            "revision": 0,
+            "created": 1559804554847,
+            "version": 0
+          },
+          "$loki": 6
+        },
+        {
+          "quest_id": "49c4fe50-8857-11e9-85d8-7bdc4f6debdd",
+          "quest_name": "Rdafvd",
+          "quest_info": "dsfvsdfv",
+          "meta": {
+            "revision": 0,
+            "created": 1559824409270,
+            "version": 0
+          },
+          "$loki": 7
+        },
+        {
+          "quest_id": "d6a28c20-8857-11e9-85d8-7bdc4f6debdd",
+          "quest_name": "cvasdv",
+          "quest_info": "sadvsadvsad",
+          "meta": {
+            "revision": 0,
+            "created": 1559824645602,
+            "version": 0
+          },
+          "$loki": 8
+        },
+        {
+          "quest_id": "1f932f70-8858-11e9-85d8-7bdc4f6debdd",
+          "quest_name": "sdfsd",
+          "quest_info": "fsdfsdf",
+          "meta": {
+            "revision": 0,
+            "created": 1559824767975,
+            "version": 0
+          },
+          "$loki": 9
+        },
+        {
+          "quest_id": "39babdf0-8858-11e9-85d8-7bdc4f6debdd",
+          "quest_name": "sacsadcsad",
+          "quest_info": "sdacasdc",
+          "meta": {
+            "revision": 0,
+            "created": 1559824811855,
+            "version": 0
+          },
+          "$loki": 10
+        },
+        {
+          "quest_id": "d3f6f850-8ac1-11e9-9207-07b5ab289f27",
+          "quest_name": "Квест 1",
+          "quest_info": "ыфмфывм",
+          "meta": {
+            "revision": 0,
+            "created": 1560090070102,
+            "version": 0
+          },
+          "$loki": 11
+        },
+        {
+          "quest_id": "a4bd1190-8ac7-11e9-b8aa-e52c232abedb",
+          "quest_name": "ыфвмыфв",
+          "quest_info": "ыфвмфывмфыв",
+          "meta": {
+            "revision": 0,
+            "created": 1560092567857,
+            "version": 0
+          },
+          "$loki": 12
+        },
+        {
+          "quest_id": "a9d13330-8ac9-11e9-b8aa-e52c232abedb",
+          "quest_name": "fsdf",
+          "quest_info": "sdfsdfsd",
+          "meta": {
+            "revision": 0,
+            "created": 1560093435363,
+            "version": 0
+          },
+          "$loki": 13
+        },
+        {
+          "quest_id": "166a2d50-8b81-11e9-b195-e50ba8915d70",
+          "quest_name": "dfbdf",
+          "quest_info": "fbvdsfb",
+          "meta": {
+            "revision": 0,
+            "created": 1560172215462,
+            "version": 0
+          },
+          "$loki": 14
         }
-    ],
-    "databaseVersion": 1.5,
-    "engineVersion": 1.5,
+      ],
+      "idIndex": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "binaryIndices": {},
+      "constraints": null,
+      "uniqueNames": [],
+      "transforms": {},
+      "objType": "quests",
+      "dirty": false,
+      "cachedIndex": null,
+      "cachedBinaryIndex": null,
+      "cachedData": null,
+      "adaptiveBinaryIndices": true,
+      "transactional": false,
+      "cloneObjects": false,
+      "cloneMethod": "parse-stringify",
+      "asyncListeners": false,
+      "disableMeta": false,
+      "disableChangesApi": true,
+      "disableDeltaChangesApi": true,
+      "autoupdate": false,
+      "serializableIndices": true,
+      "ttl": null,
+      "maxId": 14,
+      "DynamicViews": [],
+      "events": {
+        "insert": [],
+        "update": [],
+        "pre-insert": [],
+        "pre-update": [],
+        "close": [],
+        "flushbuffer": [],
+        "error": [],
+        "delete": [
+          null
+        ],
+        "warning": [
+          null
+        ]
+      },
+      "changes": []
+    },
+    {
+      "name": "levels",
+      "data": [
+        {
+          "quest_id": "893a60b0-8826-11e9-86e3-e7a6d34b8774",
+          "lvl_id": "661276a0-8dd4-11e9-a19f-3f81003fcea4",
+          "lvl_name": "fbdfb",
+          "question": "dfbdfbfd",
+          "answer": "dfbdfb",
+          "meta": {
+            "revision": 0,
+            "created": 1560427899659,
+            "version": 0
+          },
+          "$loki": 1
+        },
+        {
+          "quest_id": "8f85b4b0-8826-11e9-86e3-e7a6d34b8774",
+          "lvl_id": "cff369d0-8dd4-11e9-a19f-3f81003fcea4",
+          "lvl_name": "sv",
+          "question": "sdfvsdfv",
+          "answer": "sdfv",
+          "meta": {
+            "revision": 0,
+            "created": 1560428077293,
+            "version": 0
+          },
+          "$loki": 2
+        }
+      ],
+      "idIndex": [
+        1,
+        2
+      ],
+      "binaryIndices": {},
+      "constraints": null,
+      "uniqueNames": [],
+      "transforms": {},
+      "objType": "levels",
+      "dirty": false,
+      "cachedIndex": null,
+      "cachedBinaryIndex": null,
+      "cachedData": null,
+      "adaptiveBinaryIndices": true,
+      "transactional": false,
+      "cloneObjects": false,
+      "cloneMethod": "parse-stringify",
+      "asyncListeners": false,
+      "disableMeta": false,
+      "disableChangesApi": true,
+      "disableDeltaChangesApi": true,
+      "autoupdate": false,
+      "serializableIndices": true,
+      "ttl": null,
+      "maxId": 2,
+      "DynamicViews": [],
+      "events": {
+        "insert": [],
+        "update": [],
+        "pre-insert": [],
+        "pre-update": [],
+        "close": [],
+        "flushbuffer": [],
+        "error": [],
+        "delete": [
+          null
+        ],
+        "warning": [
+          null
+        ]
+      },
+      "changes": []
+    }
+  ],
+  "databaseVersion": 1.5,
+  "engineVersion": 1.5,
+  "autosave": true,
+  "autosaveInterval": 4000,
+  "autosaveHandle": null,
+  "throttledSaves": true,
+  "options": {
+    "autoload": true,
     "autosave": true,
     "autosaveInterval": 4000,
-    "autosaveHandle": null,
-    "throttledSaves": true,
-    "options": {
-        "autoload": true,
-        "autosave": true,
-        "autosaveInterval": 4000,
-        "serializationMethod": "normal",
-        "destructureDelimiter": "$<\n",
-        "recursiveWait": true,
-        "recursiveWaitLimit": false,
-        "recursiveWaitLimitDuration": 2000,
-        "started": 1559578920488
-    },
-    "persistenceMethod": "fs",
-    "persistenceAdapter": null,
-    "verbose": false,
-    "events": {
-        "init": [
-            null
-        ],
-        "loaded": [],
-        "flushChanges": [],
-        "close": [],
-        "changes": [],
-        "warning": []
-    },
-    "ENV": "NODEJS"
+    "serializationMethod": "normal",
+    "destructureDelimiter": "$<\n",
+    "recursiveWait": true,
+    "recursiveWaitLimit": false,
+    "recursiveWaitLimitDuration": 2000,
+    "started": 1560427869676
+  },
+  "persistenceMethod": "fs",
+  "persistenceAdapter": null,
+  "verbose": false,
+  "events": {
+    "init": [
+      null
+    ],
+    "loaded": [],
+    "flushChanges": [],
+    "close": [],
+    "changes": [],
+    "warning": []
+  },
+  "ENV": "NODEJS"
 }

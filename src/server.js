@@ -107,15 +107,22 @@ app.get("/launch-edit-details", urlencodedParser, function (request, response) {
 
 app.get("/launch-level", urlencodedParser, function (request, response) {
     if (request.query.lvl_id) {
-        lvlEditDetails = level_db.find({'lvl_id': request.query.lvl_id})[0];
+        lvlEditDetails = levels_db.find({'lvl_id': request.query.lvl_id})[0];
     } else {
-        lvlEditDetails = request.query.lvl_id;
+        var level = levels_db.find({'quest_id': request.query.quest_id})[0];
+        lvlEditDetails = level;
     }
     response.sendFile(__dirname + "/launch_lvl.html");
 });
 
 app.get("/launch-edit-details", urlencodedParser, function (request, response) {
     response.send(lvlEditDetails);
+});
+
+app.post("/level-check-answer", urlencodedParser, function (request, response) {
+    var level = levels_db.find({'lvl_id': request.query.lvl_id})[0];
+    var answer = level.answer;
+    response.send(answer === request.body.answer);
 });
 
 

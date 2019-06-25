@@ -7,6 +7,26 @@ function edit() {
     window.location = '/create-lvl?quest_id=' + vars["quest_id"];
 }
 
+function checkAnswer(levelId) {
+    var checkAnswerUrl = "/level-check-answer?lvl_id=" + levelId;
+    var checkAnswer = new XMLHttpRequest();
+    checkAnswer.open('POST', checkAnswerUrl);
+    checkAnswer.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    checkAnswer.responseType = 'json';
+
+    checkAnswer.onload = function () {
+        if (checkAnswer.response !== undefined) {
+            if (checkAnswer.response)
+                alert("Поздравляем, ваш ответ верный!");
+            else
+                alert("Увы, это неправильный ответ.")
+        }
+    };
+
+    checkAnswer.send("answer=" + levelAnswer.value);
+
+}
+
 // Элемент, куда будут загружаться квесты
 var myLvls = document.querySelector('div[name="my-lvls"]');
 
@@ -22,6 +42,7 @@ var questEditInfo = document.querySelector('textarea[name="quest_info"]');
 var launchLevel = document.querySelector('div[name="launch-level"]');
 
 // Уровень.
+var levelId = document.querySelector('input[name="lvl_id"]');
 var levelName = document.querySelector('input[name="lvl_name"]');
 var levelQuestion = document.querySelector('textarea[name="question"]');
 var levelAnswer = document.querySelector('textarea[name="answer"]');
@@ -72,7 +93,7 @@ request4.onload = function () {
     if (request4.response != undefined) {
         id.value = request4.response.quest_id;
         questEditName.value = request4.response.quest_name;
-        questEditInfo.value = request4.response.quest_info;        
+        questEditInfo.value = request4.response.quest_info;
     }
 };
 
@@ -118,8 +139,10 @@ request7.responseType = 'json';
 
 request7.onload = function () {
     if (request7.response != undefined) {
-        levelName.value = request7.response.quest_name;
-        levelQuestion.value = request7.response.quest_info;
+        levelId.value = request7.response.lvl_id;
+        levelName.value = request7.response.lvl_name;
+        levelQuestion.value = request7.response.question;
+        level
     }
 };
 
@@ -136,9 +159,9 @@ request8.onload = function () {
         levelName.value = request7.response.level_name;
         levelQuestion.value = request7.response.question;
         request8.response.forEach(function (element) {
-        c =c + '<button type="submit" class="btn btn-secondary onclick="javascript:window.location=/quest-edit?lvl_id='+ element.lvl_id + '">Далее</button>';
-    });
-    launchLevel.innerHTML = с;
+            c = c + '<button type="submit" class="btn btn-secondary onclick="javascript:window.location=/quest-edit?lvl_id=' + element.lvl_id + '">Далее</button>';
+        });
+        launchLevel.innerHTML = с;
     }
 };
 
