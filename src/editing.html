@@ -36,9 +36,10 @@
 </nav>
 
 <div name="quest-edit">
-    <form action="/save-detail" method="post" enctype="multipart/form-data">
-        <div class="main mt-5">
-            <div class="container">
+
+    <div class="main mt-5">
+        <div class="container">
+            <form action="/save-detail" method="post" enctype="multipart/form-data">
                 <div class="col-2-3">
                     <h1>Редактор квеста</h1>
                     <input type="hidden" name="quest_id" class="form-control">
@@ -53,13 +54,13 @@
                             onclick="javascript:window.location='/create-quest'">Отмена
                     </button>
                 </div>
-
-                <button type="submit" class="btn btn-primary mt-3 mb-5 ml-5" onclick="edit()">Создать уровень</button>
-                <div name="my-lvls">
-                </div>
+            </form>
+            <button type="submit" class="btn btn-primary mt-3 mb-5 ml-5" onclick="edit()">Создать уровень</button>
+            <div name="my-lvls">
             </div>
         </div>
-    </form>
+    </div>
+
 </div>
 
 <!-- Optional JavaScript -->
