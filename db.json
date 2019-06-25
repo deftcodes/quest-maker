@@ -9,9 +9,10 @@
           "quest_name": "Квест",
           "quest_info": "фывмсфывмыфв",
           "meta": {
-            "revision": 0,
+            "revision": 1,
             "created": 1559803470396,
-            "version": 0
+            "version": 0,
+            "updated": 1561489663182
           },
           "$loki": 1
         },
@@ -157,6 +158,28 @@
             "version": 0
           },
           "$loki": 14
+        },
+        {
+          "quest_id": "169bf810-977c-11e9-8fba-67268a3cba6b",
+          "quest_name": "3213",
+          "quest_info": "1231",
+          "meta": {
+            "revision": 0,
+            "created": 1561489482258,
+            "version": 0
+          },
+          "$loki": 15
+        },
+        {
+          "quest_id": "729d96a0-977c-11e9-8fba-67268a3cba6b",
+          "quest_name": "333",
+          "quest_info": "3333",
+          "meta": {
+            "revision": 0,
+            "created": 1561489636618,
+            "version": 0
+          },
+          "$loki": 16
         }
       ],
       "idIndex": [
@@ -173,7 +196,9 @@
         11,
         12,
         13,
-        14
+        14,
+        15,
+        16
       ],
       "binaryIndices": {},
       "constraints": null,
@@ -195,7 +220,7 @@
       "autoupdate": false,
       "serializableIndices": true,
       "ttl": null,
-      "maxId": 14,
+      "maxId": 16,
       "DynamicViews": [],
       "events": {
         "insert": [],
@@ -220,9 +245,9 @@
         {
           "quest_id": "893a60b0-8826-11e9-86e3-e7a6d34b8774",
           "lvl_id": "661276a0-8dd4-11e9-a19f-3f81003fcea4",
-          "lvl_name": "fbdfb",
-          "question": "dfbdfbfd",
-          "answer": "dfbdfb",
+          "lvl_name": "Уровень 1",
+          "question": "Вопрос",
+          "answer": "42",
           "meta": {
             "revision": 0,
             "created": 1560427899659,
@@ -303,7 +328,7 @@
     "recursiveWait": true,
     "recursiveWaitLimit": false,
     "recursiveWaitLimitDuration": 2000,
-    "started": 1560427869676
+    "started": 1561489072540
   },
   "persistenceMethod": "fs",
   "persistenceAdapter": null,

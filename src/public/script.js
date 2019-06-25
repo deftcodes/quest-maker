@@ -7,6 +7,8 @@ function edit() {
     window.location = '/create-lvl?quest_id=' + vars["quest_id"];
 }
 
+
+// Проверка правильности ответа.
 function checkAnswer(levelId) {
     var checkAnswerUrl = "/level-check-answer?lvl_id=" + levelId;
     var checkAnswer = new XMLHttpRequest();
