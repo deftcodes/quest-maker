@@ -85,27 +85,140 @@
     </div>
   </div>
 
-  <div class="container-fluid mt-5" style="background-color:#eee">
-    <div class="container">
-      <h1>Добро пожаловать</h1>
-      <div class="row  justify-content-center ">
-        <div class="col-xs-12 col-sm-4 col-lg-3 mt-5 ">
-          <h3>Какой-нибудь квест</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus voluptas saepe, sint quos tempora
-            doloremque omnis, ipsam harum provident sapiente voluptates aspernatur non a rerum autem delectus nisi
-            dolore odit ex quasi placeat consectetur. Assumenda sequi enim necessitatibus incidunt dolor! Ea, mollitia.
-            Eaque molestias, temporibus illo quisquam tempora eveniet odit?</p>
-        </div>
-        <div class="col-xs-12 col-sm-4 col-lg-6 mt-5 "><img src="http://www.kvestbook.com/media/photos/bytie-0.jpg"
-            class="w-100">
-        </div>
-        <div class="col-xs-12 col-sm-4 col-lg-3 h-100" >
-          <button type="submit" class="btn btn-primary mt-3 mb-5" onclick="javascript:window.location='/quests-table-page'">Мои квесты</button>
-          
-        </div>
-      </div>
-    </div>
-  </div>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
+  <style>
+  /* demo background */
+ 
+  
+  /* style snippet */
+  #thumbnail-preview-indicators {
+   position: relative;
+   overflow: hidden;
+  }
+  #thumbnail-preview-indicators .slides .slide-1, 
+  #thumbnail-preview-indicators .slides .slide-2,
+  #thumbnail-preview-indicators .slides .slide-3 {
+   background-size: cover;
+   background-position: center center;
+   background-repeat: no-repeat;
+  }
+   #thumbnail-preview-indicators,
+   #thumbnail-preview-indicators .slides,
+   #thumbnail-preview-indicators .slides .slide-1, 
+   #thumbnail-preview-indicators .slides .slide-2,
+   #thumbnail-preview-indicators .slides .slide-3 {
+   height: 480px;
+   }
+  #thumbnail-preview-indicators .slides .slide-1 {
+   background-image: url(http://old.questfinder.ru/wp-content/uploads/2014/09/18cecedc862bec305a9a286a16b5dce7.jpg); 
+  }
+  #thumbnail-preview-indicators .slides .slide-2 {
+   background-image: url(http://fashionbookkids.ru/d/i/28/bb/7f/57/84/4b/full.jpg);
+  }
+  #thumbnail-preview-indicators .slides .slide-3 {
+   background-image: url(https://media.claustrophobia.com/media/cache/80/56/805603f2aace944af74afec6e4e2978b.jpg);
+  }
+  #thumbnail-preview-indicators .carousel-inner .item .carousel-caption {
+   top: 20%;
+   bottom: inherit;
+  }
+  #thumbnail-preview-indicators .carousel-indicators li,
+  #thumbnail-preview-indicators .carousel-indicators li.active {
+   position: relative;
+   width: 100px;
+   height: 8px; 
+  }
+  #thumbnail-preview-indicators .carousel-indicators li > .thumbnail {
+   position: absolute;
+   top: 0;
+   width: 100px;
+   display: none;
+   opacity: 0;
+   left: 50%;
+   margin-top: -80px;
+   margin-left: -50px;
+  }
+  #thumbnail-preview-indicators .carousel-indicators li:hover > .thumbnail,
+  #thumbnail-preview-indicators .carousel-indicators li.active > .thumbnail {
+   display: block;
+   opacity: .8;
+  }
+  #thumbnail-preview-indicators .carousel-indicators li.active > .thumbnail:hover{
+   opacity: 1;
+  }
+  @media screen and (max-width : 480px) { 
+   #thumbnail-preview-indicators .carousel-indicators li,
+   #thumbnail-preview-indicators .carousel-indicators li.active {
+   width: 50px;
+   height: 8px;
+   position: relative;
+   }
+   #thumbnail-preview-indicators .carousel-indicators li > .thumbnail {
+   width: 50px;
+   left: 50%;
+   margin-top: -50px;
+   margin-left: -25px;
+   }
+  }
+  </style>
+  
+  <div id="thumbnail-preview-indicators" class="carousel slide" data-ride="carousel">
+   <!-- Indicators -->
+   <ol class="carousel-indicators">
+   <li data-target="#thumbnail-preview-indicators" data-slide-to="0" class="active">
+   <div class="thumbnail">
+   <img class="img-responsive" src="http://old.questfinder.ru/wp-content/uploads/2014/09/18cecedc862bec305a9a286a16b5dce7.jpg">
+   </div>
+   </li>
+   <li data-target="#thumbnail-preview-indicators" data-slide-to="1">
+   <div class="thumbnail">
+   <img class="img-responsive" src="http://fashionbookkids.ru/d/i/28/bb/7f/57/84/4b/full.jpg">
+   </div>
+   </li>
+   <li data-target="#thumbnail-preview-indicators" data-slide-to="2">
+   <div class="thumbnail">
+   <img class="img-responsive" src="https://media.claustrophobia.com/media/cache/80/56/805603f2aace944af74afec6e4e2978b.jpg">
+   </div>
+   </li>
+   </ol>
+   <div class="carousel-inner">
+   <div class="item slides active">
+   <div class="slide-1"></div>
+   <div class="container">
+   <div class="carousel-caption">
+   <h1>Подводная лодка</h1>
+   <p> Команда отважных авантюристов отправилась исследовать морские глубины на старинной субмарине. Увы, встреча с гигантским кракеном не прошла бесследно — лодка получила повреждения. Вам необходимо устранить неполадки и совершить всплытие, пока не закончился кислород.</p>
+   
+   </div>
+   </div>
+   </div>
+   <div class="item slides">
+   <div class="slide-2"></div>
+   <div class="container">
+   <div class="carousel-caption">
+   <h1>Тайна заброшенного замка </h1>
+   <p>В нашем мире нет места суеверному страху. Мы улыбаемся, когда слышим истории про неупокоенные души или вампиров, которые не отражаются в зеркалах. Но что если это необъяснимое проникает в вашу жизнь и угрожает ей острыми клыками? Справиться с вампиром непросто, ведь он хитёр и скрывается за множеством обличий. Важно помнить одно: поражение в этой схватке значит не просто смерть… </p>
+   
+   </div>
+   </div>
+   </div>
+   <div class="item slides">
+   <div class="slide-3"></div>
+   <div class="container">
+   <div class="carousel-caption">
+   <h1>Застрявшие в рефрижераторе</h1>
+   <p>Поздравляем, вам достался маньяк, который любит есть своих жертв свеженькими и поэтому хранит их в холодильнике. Ах да, жертвы — это вы, а гигантский рефрижератор может стать вашей прохладной могилой, если вы не успеете выбраться отсюда до прихода маньяка.</p>
+   
+   </div>
+   </div>
+   </div>
+   </div>
+   <a class="left carousel-control" href="#thumbnail-preview-indicators" role="button" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+   <a class="right carousel-control" href="#thumbnail-preview-indicators" role="button" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+   </div>
 
 
 
@@ -123,4 +236,63 @@
   <script src="public/script.js"></script>
 </body>
 
+
+<footer class="page-footer font-small stylish-color-dark bg-dark text-light pt-4 mt-4">
+
+  <div class="container text-center text-md-left">
+    <div class="row">
+      <div class="col-md-4 mx-auto">
+        <p><img src="images/footer-logo.png"></p>
+        <p>© 2019 Реалити-квест "Взаперти" </p>
+        <p><a href="https://v-zaperti.ru/uk/pages/rules-personal/">Политика конфиденциальности</a></p>
+      </div>
+      <hr class="clearfix w-100 d-md-none">
+      <div class="col-md-2 mx-auto">
+        <ul class="list-unstyled">
+          <li>
+            <a href="https://v-zaperti.ru/uk/quests-uk">КВЕСТЫ</a>
+          </li>
+          <li>
+            <a href="http://deti.v-zaperti.ru/">ДЛЯ ДЕТЕЙ</a>
+          </li>
+          <li>
+            <a href="http://events.v-zaperti.ru/">КОРПОРАТИВЫ</a>
+          </li>
+        </ul>
+      </div>
+      <hr class="clearfix w-100 d-md-none">
+      <div class="col-md-2 mx-auto">
+        <ul class="list-unstyled">
+          <li>
+            <a href="http://mixer-game.ru/">МИКСЕР</a>
+          </li>
+          <li>
+            <a href="https://v-zaperti.ru/barnaul/quests-barnaul/?tag=with-actors">КВЕСТ-ТЕАТР</a>
+          </li>
+          <li>
+            <a href="http://events.v-zaperti.ru/services/vypusknoj-v-shkole/">ВЫПУСКНЫЕ</a>
+          </li>
+        </ul>
+      </div>
+      <hr class="clearfix w-100 d-md-none">
+      <div class="col-md-2 mx-auto">
+        <ul class="list-unstyled">
+          <li>
+            <a href="https://v-zaperti.ru/uk/pages/about-barnaul/">О НАС</a>
+          </li>
+          <li>
+            <a href="https://v-zaperti.ru/uk/pages/contacts-barnaul/">КОНТАКТЫ</a>
+          </li>
+          <li>
+            <a href="https://v-zaperti.ru/uk/pages/franchise/">ФРАНШИЗА</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="footer-copyright text-center py-3">Телефон для связи +7 777 985 79 10
+    <a href="https://vk.com/vzaperti_ukg"> Группа ВКонатке</a>
+  </div>
+</footer>
 </html>
