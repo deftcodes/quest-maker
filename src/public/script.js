@@ -49,28 +49,28 @@ var levelAnswer = document.querySelector('textarea[name="answer"]');
 
 // Делаем запрос на сервер для получения квестов
 // Запрос отрабатывает при каждой загрузке страницы
-var url2 = "/quests-table-page"
-var request2 = new XMLHttpRequest();
-request2.open('GET', url2);
-request2.responseType = 'json';
+var questTablePageUrl = "/quests-table-page";
+var questTablePage = new XMLHttpRequest();
+questTablePage.open('GET', questTablePageUrl);
+questTablePage.responseType = 'json';
 // После получения ответа от сервера передаём данные в элемент 
-request2.onload = function () {
-    if (request2.response != undefined) {
-        questDetails.value = request2.response.quest_name;
-        questDetailsId.value = request2.response.quest_id;
+questTablePage.onload = function () {
+    if (questTablePage.response != undefined) {
+        questDetails.value = questTablePage.response.quest_name;
+        questDetailsId.value = questTablePage.response.quest_id;
     }
 };
 
-request2.send();
+questTablePage.send();
 
-var url3 = "/quests-table"
-var request3 = new XMLHttpRequest();
-request3.open('GET', url3);
-request3.responseType = 'json';
+var questTable = "/quests-table"
+var getQuestTable = new XMLHttpRequest();
+getQuestTable.open('GET', questTable);
+getQuestTable.responseType = 'json';
 
-request3.onload = function () {
-    if (request3.response != undefined) {
-        request3.response.forEach(function (element) {
+getQuestTable.onload = function () {
+    if (getQuestTable.response != undefined) {
+        getQuestTable.response.forEach(function (element) {
             var newRow = document.getElementById('quest-table').insertRow();
             newRow.innerHTML = `<tr>
       <td><textarea name="quest-id"  class="form-control" cols="50" rows="1">` + element.quest_id + `</textarea></td>
@@ -82,90 +82,89 @@ request3.onload = function () {
     }
 };
 
-request3.send();
+getQuestTable.send();
 
-var url4 = "/quest-edit-details";
-var request4 = new XMLHttpRequest();
-request4.open('GET', url4);
-request4.responseType = 'json';
+var questEditDetailsUrl = "/quest-edit-details";
+var getQuestEditDetails = new XMLHttpRequest();
+getQuestEditDetails.open('GET', questEditDetailsUrl);
+getQuestEditDetails.responseType = 'json';
 
-request4.onload = function () {
-    if (request4.response != undefined) {
-        id.value = request4.response.quest_id;
-        questEditName.value = request4.response.quest_name;
-        questEditInfo.value = request4.response.quest_info;
+getQuestEditDetails.onload = function () {
+    if (getQuestEditDetails.response != undefined) {
+        id.value = getQuestEditDetails.response.quest_id;
+        questEditName.value = getQuestEditDetails.response.quest_name;
+        questEditInfo.value = getQuestEditDetails.response.quest_info;
     }
 };
 
-request4.send();
+getQuestEditDetails.send();
 
-var url5 = "/my-lvls?quest_id=" + vars["quest_id"];
-var request5 = new XMLHttpRequest();
-request5.open('GET', url5);
-request5.responseType = 'json';
+var myLevelListUrl = "/my-lvls?quest_id=" + vars["quest_id"];
+var getMyLevels = new XMLHttpRequest();
+getMyLevels.open('GET', myLevelListUrl);
+getMyLevels.responseType = 'json';
 
-request5.onload = function () {
-    if (request5.response != undefined)
+getMyLevels.onload = function () {
+    if (getMyLevels.response != undefined)
         var a = '';
-    request5.response.forEach(function (element) {
+    getMyLevels.response.forEach(function (element) {
         a = a + '<a href="/create-lvl?lvl_id=' + element.lvl_id + '&quest_id=' + element.quest_id + '">' + element.lvl_name + '</a>';
     });
     myLvls.innerHTML = a;
 };
 
-request5.send();
+getMyLevels.send();
 
 
-var url6 = "/level-edit-details";
-var request6 = new XMLHttpRequest();
-request6.open('GET', url6);
-request6.responseType = 'json';
+var levelEditUrl = "/level-edit-details";
+var getLevelEditDetails = new XMLHttpRequest();
+getLevelEditDetails.open('GET', levelEditUrl);
+getLevelEditDetails.responseType = 'json';
 
-request6.onload = function () {
-    if (request6.response != undefined) {
-        id.value = request6.response.quest_id;
-        levelName.value = request6.response.lvl_name;
-        levelQuestion.value = request6.response.question;
-        levelAnswer.value = request6.response.answer;
+getLevelEditDetails.onload = function () {
+    if (getLevelEditDetails.response != undefined) {
+        id.value = getLevelEditDetails.response.quest_id;
+        levelName.value = getLevelEditDetails.response.lvl_name;
+        levelQuestion.value = getLevelEditDetails.response.question;
+        levelAnswer.value = getLevelEditDetails.response.answer;
     }
 };
 
-request6.send();
+getLevelEditDetails.send();
 
-var url7 = "/launch-edit-details";
-var request7 = new XMLHttpRequest();
-request7.open('GET', url7);
-request7.responseType = 'json';
+var launchEditDetails = "/launch-edit-details";
+var getLauchQuestDetails = new XMLHttpRequest();
+getLauchQuestDetails.open('GET', launchEditDetails);
+getLauchQuestDetails.responseType = 'json';
 
-request7.onload = function () {
-    if (request7.response != undefined) {
-        levelId.value = request7.response.lvl_id;
-        levelName.value = request7.response.lvl_name;
-        levelQuestion.value = request7.response.question;
-        level
+getLauchQuestDetails.onload = function () {
+    if (getLauchQuestDetails.response != undefined) {
+        levelId.value = getLauchQuestDetails.response.lvl_id;
+        levelName.value = getLauchQuestDetails.response.lvl_name;
+        levelQuestion.value = getLauchQuestDetails.response.question;        
     }
 };
 
-request7.send();
+getLauchQuestDetails.send();
 
-var url8 = "/launch-level-details";
-var request8 = new XMLHttpRequest();
-request8.open('GET', url8);
-request8.responseType = 'json';
+var launchLevelDetails = "/launch-level-details";
+var getLaunchLevelDetails = new XMLHttpRequest();
+getLaunchLevelDetails.open('GET', launchLevelDetails);
+getLaunchLevelDetails.responseType = 'json';
 
-request8.onload = function () {
-    if (request8.response != undefined) {
+getLaunchLevelDetails.onload = function () {
+    if (getLaunchLevelDetails.response != undefined) {
         var c = '';
-        levelName.value = request7.response.level_name;
-        levelQuestion.value = request7.response.question;
-        request8.response.forEach(function (element) {
+        levelName.value = getLauchQuestDetails.response.level_name;
+        levelQuestion.value = getLauchQuestDetails.response.question;
+        getLaunchLevelDetails.response.forEach(function (element) {
             c = c + '<button type="submit" class="btn btn-secondary onclick="javascript:window.location=/quest-edit?lvl_id=' + element.lvl_id + '">Далее</button>';
         });
         launchLevel.innerHTML = с;
     }
 };
 
-request8.send();
+getLaunchLevelDetails.send();
 
 
 
